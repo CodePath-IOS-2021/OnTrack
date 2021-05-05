@@ -67,18 +67,49 @@ The application allows users to plan their meals for the next week, and check th
    * Designate what meals to cook on which day (event planning)
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="OnTrack_InitialWireframe.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
+<img src="OnTrack_CurrentWireframe.png" width=600>
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### Meal
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | objectId      | String   | unique id for the user post (default field) |
+   | author        | Pointer to User| image author |
+   | image         | File     | image of the meal |
+   | description   | String   | description of the meal |
+   | ingredients   | String[] | list of ingredients for the meal |
+   | commentsCount | Number   | number of comments that has been posted to an image |
+   | likesCount    | Number   | number of likes for the post |
+   | createdAt     | DateTime | date when post is created (default field) |
+   | updatedAt     | DateTime | date when post is last updated (default field) |
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Login Screen
+    - (Read/GET) Get user information based on login information
+- Register Screen
+    - (Create/POST) Create a new user object
+- Dashboard Screen
+    - (Read/GET) List out logged in user's plans for the day
+    - (Read/GET) List out other user's meal plans
+    - (Create/POST) Like on another user's meal plan
+    - (Delete) Delete like on another user's meal plan
+- Create Meal Segue
+    - (Create/POST) Create a new meal object
+- Profile Screen
+    - (Read/GET) Query logged in user object
+    - (Read/GET) Query meal plans posted by user object
+
+#### Existing API Endpoints
+##### Edamam Nutrition Analysis API Documentation
+- BASEURL - [https://api.edamam.com]
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /search | search for recipes
+    `GET`    | /search?q=query | query text for the recipes
+    `GET`    | /search?calories=calories | calories of the meal
+    `GET`    | /search?health=health | health type of the meal
