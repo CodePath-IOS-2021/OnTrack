@@ -1,0 +1,6 @@
+framework module Pods_OnTrack_OnTrackUITests {
+  umbrella header "Pods-OnTrack-OnTrackUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
