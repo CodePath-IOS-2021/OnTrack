@@ -25,18 +25,18 @@ The application allows users to plan their meals for the next week, and check th
 
 **Required Must-have Stories**
 
-* Users are able to login/sign-up/logout from the application
-* Users are able to create a meal plan for the week
-* Users are able to edit/delete/save a meal plan
-* Users can check off meals/days.
-* Able to see a list of recipes based on their desired amount of calories
+* [ ] Users are able to login/sign-up/logout from the application
+* [ ] Users are able to create a meal plan for the week
+* [ ] Users are able to edit/delete/save a meal plan
+* [ ] Users can check off meals/days.
+* [ ] Able to see a list of recipes based on their desired amount of calories
 
 
 **Optional Nice-to-have Stories**
-* Users are able to create their own recipes.
-* Users are able to see other user's meal plans: 
-    * Commenting to share words of encouragement
-    * Users are able to like other users meal plans to show support
+* [ ] Users are able to create their own recipes.
+* [ ] Users are able to see other user's meal plans: 
+    * [ ] Commenting to share words of encouragement
+    * [ ] Users are able to like other users meal plans to show support
 
 ### 2. Screen Archetypes
 
