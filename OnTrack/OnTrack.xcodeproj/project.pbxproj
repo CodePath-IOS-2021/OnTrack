@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,8 @@
 		4C74A7AA2648E70E005D2D2D /* OnTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7A92648E70E005D2D2D /* OnTrackUITests.swift */; };
 		4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */; };
 		4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */; };
+		5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001065526507C4300E13E1B /* SignUpViewController.swift */; };
+		50643513265076F600FB323F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50643512265076F600FB323F /* LoginViewController.swift */; };
 		5CF16E8CE3C3ECA688BD0FB4 /* Pods_OnTrack_OnTrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484A62E69A43FC73BEC1A4A7 /* Pods_OnTrack_OnTrackUITests.framework */; };
 		FD4D877EA70C8E8DE173A1FA /* Pods_OnTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92523EC0180484F948AF7D81 /* Pods_OnTrack.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		4C74A7AB2648E70E005D2D2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeTableViewCell.swift; sourceTree = "<group>"; };
+		5001065526507C4300E13E1B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		50643512265076F600FB323F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C53CE42735FB75AA9148C9 /* Pods-OnTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrackTests.release.xcconfig"; path = "Target Support Files/Pods-OnTrackTests/Pods-OnTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		92523EC0180484F948AF7D81 /* Pods_OnTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF7DB3E1C9645EC25B2190F /* Pods-OnTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrack.release.xcconfig"; path = "Target Support Files/Pods-OnTrack/Pods-OnTrack.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,11 +138,13 @@
 				4C74A7892648E70D005D2D2D /* SceneDelegate.swift */,
 				4C74A78B2648E70D005D2D2D /* ViewController.swift */,
 				4C74A78D2648E70D005D2D2D /* Main.storyboard */,
+				5001065526507C4300E13E1B /* SignUpViewController.swift */,
 				4C74A7902648E70E005D2D2D /* Assets.xcassets */,
 				4C74A7922648E70E005D2D2D /* LaunchScreen.storyboard */,
 				4C74A7952648E70E005D2D2D /* Info.plist */,
 				4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */,
 				4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */,
+				50643512265076F600FB323F /* LoginViewController.swift */,
 			);
 			path = OnTrack;
 			sourceTree = "<group>";
@@ -171,7 +177,6 @@
 				DF448DA02B0932D1A8F7B23F /* Pods-OnTrackTests.debug.xcconfig */,
 				80C53CE42735FB75AA9148C9 /* Pods-OnTrackTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -413,6 +418,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50643513265076F600FB323F /* LoginViewController.swift in Sources */,
+				5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */,
 				4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */,
 				4C74A78C2648E70D005D2D2D /* ViewController.swift in Sources */,
 				4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */,
