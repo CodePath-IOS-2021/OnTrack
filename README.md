@@ -113,3 +113,7 @@ The application allows users to plan their meals for the next week, and check th
     `GET`    | /search?q=query | query text for the recipes
     `GET`    | /search?calories=calories | calories of the meal
     `GET`    | /search?health=health | health type of the meal
+    
+## Sprint 1 gifs:
+<img src="Sprint1MealPlan&Recipe.gif" width=250><br>
+
