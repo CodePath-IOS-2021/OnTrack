@@ -118,5 +118,6 @@ The application allows users to plan their meals for the next week, and check th
 ## Sprint 1 GIFs:
 <img src="Sprint1MealPlan&Recipe.gif" width=250>
 <img src="http://g.recordit.co/gUxkZTbug7.gif" width=250><br>
+<img src="ProfileDashboardLayout.png" width=250>
 
 
