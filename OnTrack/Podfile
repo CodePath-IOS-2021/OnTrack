@@ -6,6 +6,7 @@ target 'OnTrack' do
   use_frameworks!
 
   # Pods for OnTrack
+  pod "Parse"
   pod "AlamofireImage"
 
   target 'OnTrackTests' do
