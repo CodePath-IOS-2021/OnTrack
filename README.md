@@ -5,6 +5,7 @@
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
+3. [Gifs](#Sprint-1-gifs)
 
 ## Overview
 ### Description
@@ -25,11 +26,11 @@ The application allows users to plan their meals for the next week, and check th
 
 **Required Must-have Stories**
 
-* [ ] Users are able to login/sign-up/logout from the application
+* [x] Users are able to login/sign-up/logout from the application
 * [ ] Users are able to create a meal plan for the week
 * [ ] Users are able to edit/delete/save a meal plan
 * [ ] Users can check off meals/days.
-* [ ] Able to see a list of recipes based on their desired amount of calories
+* [x] Able to see a list of recipes based on their desired amount of calories
 
 
 **Optional Nice-to-have Stories**
@@ -113,3 +114,10 @@ The application allows users to plan their meals for the next week, and check th
     `GET`    | /search?q=query | query text for the recipes
     `GET`    | /search?calories=calories | calories of the meal
     `GET`    | /search?health=health | health type of the meal
+    
+## Sprint 1 GIFs:
+<img src="Sprint1MealPlan&Recipe.gif" width=250>
+<img src="http://g.recordit.co/gUxkZTbug7.gif" width=250><br>
+<img src="ProfileDashboardLayout.png" width=250>
+
+
