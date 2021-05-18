@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4B44B8E4C055D7E1AFB77047 /* Pods_OnTrackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EF6C54A3F582E1DBD8E945 /* Pods_OnTrackTests.framework */; };
+		4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2939C826505B810049AE8F /* MealTableViewCell.swift */; };
+		4C559A96264F548700183179 /* CaloryTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C559A95264F548700183179 /* CaloryTagCell.swift */; };
+		4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C559A97264F8DAD00183179 /* AddMealPlanViewController.swift */; };
 		4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7872648E70D005D2D2D /* AppDelegate.swift */; };
 		4C74A78A2648E70D005D2D2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7892648E70D005D2D2D /* SceneDelegate.swift */; };
-		4C74A78C2648E70D005D2D2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A78B2648E70D005D2D2D /* ViewController.swift */; };
 		4C74A78F2648E70D005D2D2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C74A78D2648E70D005D2D2D /* Main.storyboard */; };
 		4C74A7912648E70E005D2D2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C74A7902648E70E005D2D2D /* Assets.xcassets */; };
 		4C74A7942648E70E005D2D2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C74A7922648E70E005D2D2D /* LaunchScreen.storyboard */; };
@@ -44,10 +46,12 @@
 /* Begin PBXFileReference section */
 		24CC225951D4C95C40E079D9 /* Pods-OnTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrack.debug.xcconfig"; path = "Target Support Files/Pods-OnTrack/Pods-OnTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		484A62E69A43FC73BEC1A4A7 /* Pods_OnTrack_OnTrackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTrack_OnTrackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C2939C826505B810049AE8F /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
+		4C559A95264F548700183179 /* CaloryTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloryTagCell.swift; sourceTree = "<group>"; };
+		4C559A97264F8DAD00183179 /* AddMealPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealPlanViewController.swift; sourceTree = "<group>"; };
 		4C74A7842648E70D005D2D2D /* OnTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C74A7872648E70D005D2D2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C74A7892648E70D005D2D2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C74A78B2648E70D005D2D2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C74A78E2648E70D005D2D2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C74A7902648E70E005D2D2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C74A7932648E70E005D2D2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -136,7 +140,6 @@
 			children = (
 				4C74A7872648E70D005D2D2D /* AppDelegate.swift */,
 				4C74A7892648E70D005D2D2D /* SceneDelegate.swift */,
-				4C74A78B2648E70D005D2D2D /* ViewController.swift */,
 				4C74A78D2648E70D005D2D2D /* Main.storyboard */,
 				5001065526507C4300E13E1B /* SignUpViewController.swift */,
 				4C74A7902648E70E005D2D2D /* Assets.xcassets */,
@@ -145,6 +148,9 @@
 				4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */,
 				4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */,
 				50643512265076F600FB323F /* LoginViewController.swift */,
+				4C559A95264F548700183179 /* CaloryTagCell.swift */,
+				4C559A97264F8DAD00183179 /* AddMealPlanViewController.swift */,
+				4C2939C826505B810049AE8F /* MealTableViewCell.swift */,
 			);
 			path = OnTrack;
 			sourceTree = "<group>";
@@ -420,9 +426,11 @@
 			files = (
 				50643513265076F600FB323F /* LoginViewController.swift in Sources */,
 				5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */,
+				4C559A96264F548700183179 /* CaloryTagCell.swift in Sources */,
 				4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */,
-				4C74A78C2648E70D005D2D2D /* ViewController.swift in Sources */,
 				4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */,
+				4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */,
+				4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */,
 				4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */,
 				4C74A78A2648E70D005D2D2D /* SceneDelegate.swift in Sources */,
 			);
