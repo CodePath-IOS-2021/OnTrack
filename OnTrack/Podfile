@@ -7,6 +7,7 @@ target 'OnTrack' do
 
   # Pods for OnTrack
   pod "AlamofireImage"
+  pod 'MaterialComponents/Chips'
 
   target 'OnTrackTests' do
     inherit! :search_paths
