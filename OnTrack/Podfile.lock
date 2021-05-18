@@ -3,14 +3,6 @@ PODS:
   - AlamofireImage (4.1.0):
     - Alamofire (~> 5.1)
   - Bolts/Tasks (1.9.1)
-  - Parse (1.19.2):
-    - Parse/Core (= 1.19.2)
-  - Parse/Core (1.19.2):
-    - Bolts/Tasks (= 1.9.1)
-
-DEPENDENCIES:
-  - AlamofireImage
-  - Parse
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/Buttons (124.2.0):
@@ -82,32 +74,35 @@ DEPENDENCIES:
     - MDFTextAccessibility
   - MDFInternationalization (3.0.0)
   - MDFTextAccessibility (2.0.1)
+  - Parse (1.19.2):
+    - Parse/Core (= 1.19.2)
+  - Parse/Core (1.19.2):
+    - Bolts/Tasks (= 1.9.1)
 
 DEPENDENCIES:
   - AlamofireImage
   - MaterialComponents/Chips
+  - Parse
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
     - Bolts
-    - Parse
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
+    - Parse
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
-  Parse: 081fb8755c3000fd11df817eec235def233d0af3
-
-PODFILE CHECKSUM: e8b8c70133bce6c766d563bcab6ed85890406de8
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
+  Parse: 081fb8755c3000fd11df817eec235def233d0af3
 
-PODFILE CHECKSUM: 43509331c24e5bfffa9066c049dbdf7a6f2b16a2
+PODFILE CHECKSUM: 24ed237095bad5a9e4bcfa89bcffc953aef7628f
 
 COCOAPODS: 1.10.1
