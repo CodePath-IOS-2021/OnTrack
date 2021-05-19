@@ -113,8 +113,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell") as! recipeTableViewCell
         
-        let recipeDict = recipeDict[indexPath.row] as [String:Any]
-        let recipe = recipeDict["recipe"] as! [String:Any]
+        let recipeDictionary = recipeDict[indexPath.row] as [String:Any]
+        let recipe = recipeDictionary["recipe"] as! [String:Any]
         
         cell.recipeTitle.text = recipe["label"] as? String
         let caloryNumber = recipe["calories"] as! NSNumber      // calories is a number
@@ -137,8 +137,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         let indexPath = recipeTableView.indexPath(for: curr_cell)!
         
         // get the current recipe object
-        let recipeDict = recipeDict[indexPath.row] as [String:Any]
-        let recipe = recipeDict["recipe"] as! [String:Any]
+        let recipeDictionary = recipeDict[indexPath.row] as [String:Any]
+        let recipe = recipeDictionary["recipe"] as! [String:Any]
         showToast(controller: self, message: "Recipe added to \(mealType)!", seconds: 1)
         
         // send the recipe object to AddMealPlan ViewController

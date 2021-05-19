@@ -604,7 +604,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yO-KM-Rfl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-646" y="776"/>
+            <point key="canvasLocation" x="-606" y="734"/>
         </scene>
         <!--Add a recipe-->
         <scene sceneID="T75-hQ-sVO">
@@ -780,7 +780,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ba5-jx-a2I"/>
         <segue reference="JmE-OA-dHB"/>
     </inferredMetricsTieBreakers>
     <resources>
