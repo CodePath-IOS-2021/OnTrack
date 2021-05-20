@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BbY-sx-i2b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yq9-hJ-mEe">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -298,11 +298,11 @@
                                     <constraint firstAttribute="height" constant="367" id="cz2-no-6fs"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="communityTableViewCell" rowHeight="258" id="A7P-Qv-Ap1" customClass="communityTableViewCell" customModule="OnTrack" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="358" height="258"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="communityTableViewCell" rowHeight="190" id="A7P-Qv-Ap1" customClass="communityTableViewCell" customModule="OnTrack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="358" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A7P-Qv-Ap1" id="iOk-yk-REY">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="258"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="190"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hlW-0c-Cvn">
@@ -941,22 +941,21 @@
         <!--Profile-->
         <scene sceneID="6YE-er-tY7">
             <objects>
-                <viewController id="MmU-Ye-bLc" sceneMemberID="viewController">
+                <viewController id="MmU-Ye-bLc" customClass="ProfileViewController" customModule="OnTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qzN-nq-VON">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia0-MZ-KXJ">
-                                <rect key="frame" x="0.0" y="33" width="390" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ia0-MZ-KXJ">
+                                <rect key="frame" x="0.0" y="50" width="390" height="44"/>
                                 <items>
                                     <navigationItem title="OnTrack" id="PMl-Js-TAf">
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="plus" catalog="system" id="Uog-Uo-d8j"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Meals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-XX-v7a">
-                                <rect key="frame" x="16" y="102" width="49" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-XX-v7a">
+                                <rect key="frame" x="16" y="102" width="366" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -968,11 +967,11 @@
                                     <constraint firstAttribute="height" constant="617" id="RPk-lT-bEG"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="187" id="lJf-dm-KoR">
-                                        <rect key="frame" x="0.0" y="28" width="358" height="187"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileMealsTableViewCell" rowHeight="190" id="lJf-dm-KoR" customClass="profileMealsTableViewCell" customModule="OnTrack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="358" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJf-dm-KoR" id="ely-GR-ML8">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="187"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJf-dm-KoR" translatesAutoresizingMaskIntoConstraints="NO" id="ely-GR-ML8">
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="190"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6UO-io-E23">
@@ -1027,6 +1026,13 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="caloriesLabel" destination="t8J-np-S4P" id="6Xm-jF-bjP"/>
+                                            <outlet property="mealImageView" destination="3gn-5v-5vY" id="qnz-FS-ftE"/>
+                                            <outlet property="mealLabel" destination="H5F-7C-hFb" id="nlg-TR-yuD"/>
+                                            <outlet property="timeCreatedLabel" destination="QOg-MP-gba" id="Suj-rG-EGi"/>
+                                            <outlet property="usernameLabel" destination="JAr-8O-SpL" id="6dz-G6-Wt2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -1035,15 +1041,24 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="bottom" secondItem="gxK-bM-n2l" secondAttribute="bottom" constant="13" id="8di-c5-66d"/>
+                            <constraint firstItem="Ia0-MZ-KXJ" firstAttribute="leading" secondItem="qzN-nq-VON" secondAttribute="leading" id="AUx-QO-rQq"/>
                             <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="ApG-Hl-V8o"/>
+                            <constraint firstItem="BVk-XX-v7a" firstAttribute="top" secondItem="Ia0-MZ-KXJ" secondAttribute="bottom" constant="8" id="Klr-gq-Xwa"/>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="gxK-bM-n2l" secondAttribute="trailing" constant="16" id="Kr4-Dy-Yw8"/>
+                            <constraint firstItem="BVk-XX-v7a" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="RAQ-Lp-mVl"/>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="gxK-bM-n2l" secondAttribute="trailing" constant="16" id="U8j-er-sre"/>
                             <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="BVk-XX-v7a" secondAttribute="leading" id="Y9r-H1-dcp"/>
+                            <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="BVk-XX-v7a" secondAttribute="trailing" constant="8" id="YvQ-B4-VDv"/>
+                            <constraint firstItem="Ia0-MZ-KXJ" firstAttribute="centerX" secondItem="gxK-bM-n2l" secondAttribute="centerX" id="dYi-ny-ooa"/>
                             <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="nOc-CP-U3w"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="top" secondItem="BVk-XX-v7a" secondAttribute="bottom" constant="8" symbolic="YES" id="xsC-Xq-cUJ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.fill" catalog="system" id="CRF-DX-EKY"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mealsTableView" destination="gxK-bM-n2l" id="OT8-Mr-Qrp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fBb-fD-dB7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
