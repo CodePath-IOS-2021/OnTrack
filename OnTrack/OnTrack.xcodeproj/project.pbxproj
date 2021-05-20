@@ -23,6 +23,9 @@
 		5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001065526507C4300E13E1B /* SignUpViewController.swift */; };
 		50643513265076F600FB323F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50643512265076F600FB323F /* LoginViewController.swift */; };
 		5CF16E8CE3C3ECA688BD0FB4 /* Pods_OnTrack_OnTrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484A62E69A43FC73BEC1A4A7 /* Pods_OnTrack_OnTrackUITests.framework */; };
+		861B76962655BF1200F4A058 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B76952655BF1200F4A058 /* HomeViewController.swift */; };
+		861B769B2655C12400F4A058 /* communityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B769A2655C12400F4A058 /* communityTableViewCell.swift */; };
+		861B76A02655C8DC00F4A058 /* todayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B769F2655C8DC00F4A058 /* todayCollectionViewCell.swift */; };
 		FD4D877EA70C8E8DE173A1FA /* Pods_OnTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92523EC0180484F948AF7D81 /* Pods_OnTrack.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +70,9 @@
 		5001065526507C4300E13E1B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		50643512265076F600FB323F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C53CE42735FB75AA9148C9 /* Pods-OnTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrackTests.release.xcconfig"; path = "Target Support Files/Pods-OnTrackTests/Pods-OnTrackTests.release.xcconfig"; sourceTree = "<group>"; };
+		861B76952655BF1200F4A058 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		861B769A2655C12400F4A058 /* communityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = communityTableViewCell.swift; sourceTree = "<group>"; };
+		861B769F2655C8DC00F4A058 /* todayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todayCollectionViewCell.swift; sourceTree = "<group>"; };
 		92523EC0180484F948AF7D81 /* Pods_OnTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF7DB3E1C9645EC25B2190F /* Pods-OnTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrack.release.xcconfig"; path = "Target Support Files/Pods-OnTrack/Pods-OnTrack.release.xcconfig"; sourceTree = "<group>"; };
 		C8EF6C54A3F582E1DBD8E945 /* Pods_OnTrackTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTrackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +157,9 @@
 				4C559A95264F548700183179 /* CaloryTagCell.swift */,
 				4C559A97264F8DAD00183179 /* AddMealPlanViewController.swift */,
 				4C2939C826505B810049AE8F /* MealTableViewCell.swift */,
+				861B76952655BF1200F4A058 /* HomeViewController.swift */,
+				861B769A2655C12400F4A058 /* communityTableViewCell.swift */,
+				861B769F2655C8DC00F4A058 /* todayCollectionViewCell.swift */,
 			);
 			path = OnTrack;
 			sourceTree = "<group>";
@@ -424,11 +433,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				861B76A02655C8DC00F4A058 /* todayCollectionViewCell.swift in Sources */,
+				861B769B2655C12400F4A058 /* communityTableViewCell.swift in Sources */,
 				50643513265076F600FB323F /* LoginViewController.swift in Sources */,
 				5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */,
 				4C559A96264F548700183179 /* CaloryTagCell.swift in Sources */,
 				4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */,
 				4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */,
+				861B76962655BF1200F4A058 /* HomeViewController.swift in Sources */,
 				4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */,
 				4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */,
 				4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */,
@@ -611,6 +623,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -630,6 +643,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
