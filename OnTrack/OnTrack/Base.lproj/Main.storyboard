@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yq9-hJ-mEe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MmU-Ye-bLc">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -964,14 +964,14 @@
                                 <rect key="frame" x="16" y="131" width="358" height="617"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="617" id="RPk-lT-bEG"/>
+                                    <constraint firstAttribute="height" constant="617" id="ty3-HR-GAp"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileMealsTableViewCell" rowHeight="190" id="lJf-dm-KoR" customClass="profileMealsTableViewCell" customModule="OnTrack" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="358" height="190"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileMealsTableViewCell" rowHeight="300" id="lJf-dm-KoR" customClass="profileMealsTableViewCell" customModule="OnTrack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="358" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJf-dm-KoR" translatesAutoresizingMaskIntoConstraints="NO" id="ely-GR-ML8">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6UO-io-E23">
@@ -1040,18 +1040,15 @@
                         <viewLayoutGuide key="safeArea" id="qc5-10-ab5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qc5-10-ab5" firstAttribute="bottom" secondItem="gxK-bM-n2l" secondAttribute="bottom" constant="13" id="8di-c5-66d"/>
                             <constraint firstItem="Ia0-MZ-KXJ" firstAttribute="leading" secondItem="qzN-nq-VON" secondAttribute="leading" id="AUx-QO-rQq"/>
-                            <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="ApG-Hl-V8o"/>
+                            <constraint firstItem="qc5-10-ab5" firstAttribute="bottom" secondItem="gxK-bM-n2l" secondAttribute="bottom" constant="13" id="Ens-qr-2cq"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="trailing" secondItem="qzN-nq-VON" secondAttribute="trailingMargin" id="HaN-CA-49x"/>
                             <constraint firstItem="BVk-XX-v7a" firstAttribute="top" secondItem="Ia0-MZ-KXJ" secondAttribute="bottom" constant="8" id="Klr-gq-Xwa"/>
-                            <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="gxK-bM-n2l" secondAttribute="trailing" constant="16" id="Kr4-Dy-Yw8"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="centerX" secondItem="Ia0-MZ-KXJ" secondAttribute="centerX" id="Ndm-9z-nC5"/>
                             <constraint firstItem="BVk-XX-v7a" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="RAQ-Lp-mVl"/>
-                            <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="gxK-bM-n2l" secondAttribute="trailing" constant="16" id="U8j-er-sre"/>
-                            <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="BVk-XX-v7a" secondAttribute="leading" id="Y9r-H1-dcp"/>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="BVk-XX-v7a" secondAttribute="trailing" constant="8" id="YvQ-B4-VDv"/>
-                            <constraint firstItem="Ia0-MZ-KXJ" firstAttribute="centerX" secondItem="gxK-bM-n2l" secondAttribute="centerX" id="dYi-ny-ooa"/>
-                            <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="nOc-CP-U3w"/>
-                            <constraint firstItem="gxK-bM-n2l" firstAttribute="top" secondItem="BVk-XX-v7a" secondAttribute="bottom" constant="8" symbolic="YES" id="xsC-Xq-cUJ"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="BVk-XX-v7a" secondAttribute="leading" id="nf3-kZ-mFY"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="top" secondItem="BVk-XX-v7a" secondAttribute="bottom" constant="8" symbolic="YES" id="tLQ-I4-kQP"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.fill" catalog="system" id="CRF-DX-EKY"/>
