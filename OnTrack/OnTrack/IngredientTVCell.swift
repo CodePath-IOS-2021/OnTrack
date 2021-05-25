@@ -1,18 +1,15 @@
 //
-//  recipeTableViewCell.swift
+//  IngredientTVCell.swift
 //  OnTrack
 //
-//  Created by  caijicang on 2021/5/9.
+//  Created by  caijicang on 2021/5/22.
 //
 
 import UIKit
 
-class recipeTableViewCell: UITableViewCell {
+class IngredientTVCell: UITableViewCell {
 
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var calories: UILabel!
-    @IBOutlet weak var dishType: UILabel!
+    @IBOutlet weak var ingredientLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

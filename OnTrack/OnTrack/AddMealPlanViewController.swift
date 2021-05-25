@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Parse
 
 class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var mealType = ""       // keep track of which meal to add
+    var mealType = ""       // keep track of which meal to add/remove
     
     // MARK: Setup
     // Three tableViews
@@ -27,12 +28,18 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     var lunchRecipes = [[String:Any]]()
     var dinnerRecipes = [[String:Any]]()
     
+    // Three dictionary buffers as PFObjects holding the recipe to be added to the database
+    var breakfastRecipeArrBuffer = [PFObject]()
+    var lunchRecipeArrBuffer = [PFObject]()
+    var dinnerRecipeArrBuffer = [PFObject]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // data passing
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTV), name: NSNotification.Name(rawValue: "reloadTV"), object: nil)
+        // data passing setup
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTV), name: NSNotification.Name(rawValue: "addToMealPlan"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(identifyMealType), name: NSNotification.Name(rawValue: "mealType"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTV), name: NSNotification.Name(rawValue: "removeFromMealPlan"), object: nil)
         
         // Table View setup
         breakfastTV.delegate = self
@@ -51,6 +58,8 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         dinnerTV.separatorColor = UIColor.white
     }
     
+    // MARK: data passing: add/remove meals
+    
     // When a new recipe is added, identify its meal type
     @objc func identifyMealType(notification: NSNotification){
         if notification.object as! String == "breakfast" {
@@ -63,54 +72,78 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-    // When a new recipe is added, reload the tableViews
+    // When a recipe is added/removed, reload the corresponding tableView
     @objc func reloadTV(notification: NSNotification){
-        if mealType == "breakfast" {
-            breakfastRecipes.append(notification.object as! [String:Any])
-            breakfastTV.reloadData()
-        } else if mealType == "lunch" {
-            lunchRecipes.append(notification.object as! [String:Any])
-            lunchTV.reloadData()
-        } else {
-            dinnerRecipes.append(notification.object as! [String:Any])
-            dinnerTV.reloadData()
+        if notification.name.rawValue == "addToMealPlan" {
+            if mealType == "breakfast" {
+                breakfastRecipes.append(notification.object as! [String:Any])
+                breakfastTV.reloadData()
+            } else if mealType == "lunch" {
+                lunchRecipes.append(notification.object as! [String:Any])
+                lunchTV.reloadData()
+            } else {
+                dinnerRecipes.append(notification.object as! [String:Any])
+                dinnerTV.reloadData()
+            }
+        } else if notification.name.rawValue == "removeFromMealPlan" {
+            if mealType == "breakfast" {
+                breakfastRecipes.remove(at: notification.object as! Int)
+                breakfastTV.reloadData()
+            } else if mealType == "lunch" {
+                lunchRecipes.remove(at: notification.object as! Int)
+                lunchTV.reloadData()
+            } else {
+                dinnerRecipes.remove(at: notification.object as! Int)
+                dinnerTV.reloadData()
+            }
         }
-        viewWillLayoutSubviews()
+        viewWillLayoutSubviews()    // restructure the tableView's layout
     }
     
     // MARK: Segue Config / Navigation
-    @IBAction func addBreakfast(_ sender: Any) {
-        performSegue(withIdentifier: "addBreakfast", sender: self)
-    }
-    
-    @IBAction func addLunch(_ sender: Any) {
-        performSegue(withIdentifier: "addLunch", sender: self)
-    }
-    
-    @IBAction func addDinner(_ sender: Any) {
-        performSegue(withIdentifier: "addDinner", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        let nav = segue.destination as! UINavigationController
-        let destVC = nav.topViewController as! RecipeViewController
-        if segue.identifier == "addBreakfast" {
-            destVC.mealType = "breakfast"
-        } else if segue.identifier == "addLunch" {
-            destVC.mealType = "lunch"
-        } else {
-            destVC.mealType = "dinner"
+        
+        // when clicking an add button, navigate to recipe search page
+        if segue.identifier == "addBreakfast" || segue.identifier == "addLunch" || segue.identifier == "addDinner" {
+            let nav = segue.destination as! UINavigationController
+            let destVC = nav.topViewController as! RecipeViewController
+            if segue.identifier == "addBreakfast" {
+                destVC.mealType = "breakfast"
+            } else if segue.identifier == "addLunch" {
+                destVC.mealType = "lunch"
+            } else {
+                destVC.mealType = "dinner"
+            }
         }
+        // when clicking a specific line of recipe, navigate to details page
+        else {
+            let nav = segue.destination as! UINavigationController
+            let destVC = nav.topViewController as! RecipeDetailsViewController
+            destVC.fromController = "AddMealPlan"
+            // locate the current meal cell
+            let curr_cell = sender as! MealTableViewCell
+            
+            if segue.identifier == "seeBreakfastRecipeDetails" {
+                let indexPath = breakfastTV.indexPath(for: curr_cell)!
+                destVC.recipe = breakfastRecipes[indexPath.row]
+                destVC.passedInMealType = "breakfast"
+                destVC.indexOfRecipe = indexPath.row
+            } else if segue.identifier == "seeLunchRecipeDetails" {
+                let indexPath = lunchTV.indexPath(for: curr_cell)!
+                destVC.recipe = lunchRecipes[indexPath.row]
+                destVC.passedInMealType = "lunch"
+                destVC.indexOfRecipe = indexPath.row
+            } else {
+                let indexPath = dinnerTV.indexPath(for: curr_cell)!
+                destVC.recipe = dinnerRecipes[indexPath.row]
+                destVC.passedInMealType = "dinner"
+                destVC.indexOfRecipe = indexPath.row
+            }
+        }
+        
     }
-
-    // auto-size the height of the tableView
-    override func viewWillLayoutSubviews() {
-        super.updateViewConstraints()
-        self.breakfastTVHeightConstraint?.constant = breakfastTV.contentSize.height
-        self.lunchTVHeightConstraint?.constant = lunchTV.contentSize.height
-        self.dinnerTVHeightConstraint?.constant = dinnerTV.contentSize.height
-    }
+    
     
     // MARK: Table View Config
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,4 +173,135 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    // auto-size the height of the tableView
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        self.breakfastTVHeightConstraint?.constant = breakfastTV.contentSize.height
+        self.lunchTVHeightConstraint?.constant = lunchTV.contentSize.height
+        self.dinnerTVHeightConstraint?.constant = dinnerTV.contentSize.height
+    }
+    
+    // click the trash button to remove meals
+    @IBAction func removeBreakfast(_ sender: UIButton) {
+        // locate the current meal cell
+        let curr_cell = sender.superview?.superview as! MealTableViewCell
+        let indexPath = breakfastTV.indexPath(for: curr_cell)!
+        
+        // get the current breakfast meal
+        breakfastRecipes.remove(at: indexPath.row)
+        breakfastTV.reloadData()
+        viewWillLayoutSubviews()
+        Helper.showToast(controller: self, message: "Recipe removed from breakfast", seconds: 1)
+    }
+    
+    @IBAction func removeLunch(_ sender: UIButton) {
+        // locate the current meal cell
+        let curr_cell = sender.superview?.superview as! MealTableViewCell
+        let indexPath = lunchTV.indexPath(for: curr_cell)!
+        
+        // get the current breakfast meal
+        lunchRecipes.remove(at: indexPath.row)
+        lunchTV.reloadData()
+        viewWillLayoutSubviews()
+        Helper.showToast(controller: self, message: "Recipe removed from lunch", seconds: 1)
+    }
+    
+    @IBAction func removeDinner(_ sender: UIButton) {
+        // locate the current meal cell
+        let curr_cell = sender.superview?.superview as! MealTableViewCell
+        let indexPath = dinnerTV.indexPath(for: curr_cell)!
+        
+        // get the current breakfast meal
+        dinnerRecipes.remove(at: indexPath.row)
+        dinnerTV.reloadData()
+        viewWillLayoutSubviews()
+        Helper.showToast(controller: self, message: "Recipe removed from dinner", seconds: 1)
+    }
+    
+    // MARK: Parse Backend
+    // send the meal plan to the Parse backend
+    @IBAction func addMealPlanBtn(_ sender: Any) {
+        let mealPlan = PFObject(className: "MealPlan")
+        mealPlan["user"] = PFUser.current()
+    
+        // add the customized Recipe objects one by one to the database
+        for curr_recipe in breakfastRecipes {
+            addRecipeToDatabase(curr_recipe: curr_recipe, mealType: "breakfast")
+        }
+        for curr_recipe in lunchRecipes {
+            addRecipeToDatabase(curr_recipe: curr_recipe, mealType: "lunch")
+        }
+        for curr_recipe in dinnerRecipes {
+            addRecipeToDatabase(curr_recipe: curr_recipe, mealType: "dinner")
+        }
+        
+        // add the collections of Recipe objects as the attributes of MealPlan object
+        mealPlan["breakfast_recipes"] = breakfastRecipeArrBuffer
+        mealPlan["lunch_recipes"] = lunchRecipeArrBuffer
+        mealPlan["dinner_recipes"] = dinnerRecipeArrBuffer
+        mealPlan.saveInBackground { success, error in
+            if success {
+                print("Meal plan saved!")
+            } else {
+                print(error!)
+            }
+        }
+        Helper.showToast(controller: self, message: "Meal Plan Added!", seconds: 1)
+        
+        // clear the buffer
+        breakfastRecipeArrBuffer = [PFObject]()
+        lunchRecipeArrBuffer = [PFObject]()
+        dinnerRecipeArrBuffer = [PFObject]()
+    }
+    
+    // add the customized Recipe object to the database
+    func addRecipeToDatabase(curr_recipe: [String:Any], mealType: String) {
+        let recipe = PFObject(className: "Recipe")
+        recipe["label"] = curr_recipe["label"]
+        recipe["image"] = curr_recipe["image"]
+        recipe["url"] = curr_recipe["url"]
+        recipe["ingredients"] = curr_recipe["ingredientLines"]
+        
+        let caloryNumber = curr_recipe["calories"] as! NSNumber      // calories is a number
+        let roundCaloryNumber = round(Double(truncating: caloryNumber) * 100) / 100.0    // round it to 2 decimal places
+        recipe["calories"] = String(roundCaloryNumber)         // convert it to a string
+        
+        if curr_recipe["dishType"] == nil {
+            recipe["dishType"] = "None"
+        } else {
+            let dishTypeArray = curr_recipe["dishType"] as! [String]
+            recipe["dishType"] = dishTypeArray[0]
+        }
+        
+        if curr_recipe["cuisineType"] == nil {
+            recipe["cuisineType"] = "None"
+        } else {
+            let cuisineTypeArray = curr_recipe["cuisineType"] as! [String]
+            recipe["cuisineType"] = cuisineTypeArray[0]
+        }
+        
+        if curr_recipe["mealType"] == nil {
+            recipe["mealType"] = "None"
+        } else {
+            let mealTypeArray = curr_recipe["mealType"] as! [String]
+            recipe["mealType"] = mealTypeArray[0]
+        }
+        
+        recipe.saveInBackground { success, error in
+            if success {
+                print("Recipe saved!")
+            } else {
+                print(error!)
+            }
+        }
+        
+        if mealType == "breakfast" {
+            breakfastRecipeArrBuffer.append(recipe)
+        } else if mealType == "lunch" {
+            lunchRecipeArrBuffer.append(recipe)
+        } else {
+            dinnerRecipeArrBuffer.append(recipe)
+        }
+    }
+
 }
