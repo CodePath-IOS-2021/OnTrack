@@ -121,8 +121,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
             Helper.showToast(controller: self, message: "Recipe removed from \(passedInMealType)!", seconds: 1)
         }
         
-        // dimiss this currently presenting RecipeDetailsViewController
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
+        // dimiss this currently presenting RecipeDetailsViewController after showing toast for 1 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
+        
     }
 
 

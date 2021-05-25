@@ -242,6 +242,19 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         mealPlan.saveInBackground { success, error in
             if success {
                 print("Meal plan saved!")
+                
+                // append the MealPlan object to the "meal_plans" attribute of the user
+                // after the MealPlan object is saved
+                let user = PFUser.current()!
+                user.add(mealPlan, forKey: "meal_plans")
+                user.saveInBackground { success, error in
+                    if success {
+                        print("User profile saved!")
+                    } else {
+                        print(error!)
+                    }
+                }
+    
             } else {
                 print(error!)
             }
