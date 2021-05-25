@@ -20,6 +20,9 @@
 		4C74A7AA2648E70E005D2D2D /* OnTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7A92648E70E005D2D2D /* OnTrackUITests.swift */; };
 		4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */; };
 		4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */; };
+		4CCCD0CC2659E06300417B05 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */; };
+		4CCCD0CE265A31DC00417B05 /* IngredientTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */; };
+		4CEC68BD265C5D64002963DB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC68BC265C5D64002963DB /* Helper.swift */; };
 		5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001065526507C4300E13E1B /* SignUpViewController.swift */; };
 		50643513265076F600FB323F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50643512265076F600FB323F /* LoginViewController.swift */; };
 		5CF16E8CE3C3ECA688BD0FB4 /* Pods_OnTrack_OnTrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484A62E69A43FC73BEC1A4A7 /* Pods_OnTrack_OnTrackUITests.framework */; };
@@ -69,6 +72,9 @@
 		4C74A7AB2648E70E005D2D2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeTableViewCell.swift; sourceTree = "<group>"; };
+		4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
+		4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTVCell.swift; sourceTree = "<group>"; };
+		4CEC68BC265C5D64002963DB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		5001065526507C4300E13E1B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		50643512265076F600FB323F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		80C53CE42735FB75AA9148C9 /* Pods-OnTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrackTests.release.xcconfig"; path = "Target Support Files/Pods-OnTrackTests/Pods-OnTrackTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +172,9 @@
 				861B769F2655C8DC00F4A058 /* todayCollectionViewCell.swift */,
 				861B76A42656213500F4A058 /* ProfileViewController.swift */,
 				861B76A92656224800F4A058 /* profileMealsTableViewCell.swift */,
+				4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */,
+				4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */,
+				4CEC68BC265C5D64002963DB /* Helper.swift */,
 			);
 			path = OnTrack;
 			sourceTree = "<group>";
@@ -443,15 +452,18 @@
 				861B769B2655C12400F4A058 /* communityTableViewCell.swift in Sources */,
 				50643513265076F600FB323F /* LoginViewController.swift in Sources */,
 				5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */,
+				4CCCD0CE265A31DC00417B05 /* IngredientTVCell.swift in Sources */,
 				4C559A96264F548700183179 /* CaloryTagCell.swift in Sources */,
 				4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */,
 				4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */,
+				4CEC68BD265C5D64002963DB /* Helper.swift in Sources */,
 				861B76962655BF1200F4A058 /* HomeViewController.swift in Sources */,
 				861B76AA2656224800F4A058 /* profileMealsTableViewCell.swift in Sources */,
 				4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */,
 				4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */,
 				861B76A52656213500F4A058 /* ProfileViewController.swift in Sources */,
 				4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */,
+				4CCCD0CC2659E06300417B05 /* RecipeDetailsViewController.swift in Sources */,
 				4C74A78A2648E70D005D2D2D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 945LYSS69S;
 				INFOPLIST_FILE = OnTrack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -650,6 +663,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 945LYSS69S;
 				INFOPLIST_FILE = OnTrack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
