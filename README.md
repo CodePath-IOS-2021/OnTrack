@@ -27,7 +27,7 @@ The application allows users to plan their meals for the next week, and check th
 **Required Must-have Stories**
 
 * [x] Users are able to login/sign-up/logout from the application
-* [ ] Users are able to create a meal plan for the week
+* [x] Users are able to create a meal plan for the week
 * [ ] Users are able to edit/delete/save a meal plan
 * [ ] Users can check off meals/days.
 * [x] Able to see a list of recipes based on their desired amount of calories
@@ -35,7 +35,7 @@ The application allows users to plan their meals for the next week, and check th
 
 **Optional Nice-to-have Stories**
 * [ ] Users are able to create their own recipes.
-* [ ] Users are able to see other user's meal plans: 
+* [x] Users are able to see other user's meal plans: 
     * [ ] Commenting to share words of encouragement
     * [ ] Users are able to like other users meal plans to show support
 
@@ -120,4 +120,5 @@ The application allows users to plan their meals for the next week, and check th
 <img src="http://g.recordit.co/gUxkZTbug7.gif" width=250><br>
 <img src="ProfileDashboardLayout.png" width=250>
 
-
+## Sprint 2 GIFs:
+<img src="http://g.recordit.co/MFxQBf4O4S.gif" width=250>
