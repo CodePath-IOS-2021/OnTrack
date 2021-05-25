@@ -16,7 +16,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var recipeSearchBar: UISearchBar!
     @IBOutlet var caloryTagsCollectionView: UICollectionView!
     
-    var recipeDict = [[String:Any]]()          // dictionary to hold the recipe JSON object
+    var recipeDict = [[String:Any]]()          // dictionary to hold the recipe JSON objects
     let caloryTags = ["< 200", "200 - 400", "400 - 600", "> 600"]
     var selectedCaloryTags: [String] = []       // keep track of the selected calory tags
 
@@ -52,9 +52,9 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     let app_id = "a88f7131"
     let app_key = "5a4cd86659de2dc4bb22022785af1c61"
     
-    // number of recipes displayed at each round
-    let from = 0
-    let to = 20
+    // number of recipes displayed at each round, default is 20
+    let from = 0        // always starts from 0
+    var to = 20     // this can be incremented for infinite scrolling
     
     // recipe search filters
     var query = ""
@@ -101,6 +101,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         recipeSearchBar.text = ""
         recipeSearchBar.setShowsCancelButton(false, animated: true)
         recipeSearchBar.endEditing(true)
+        query = ""      // reset the query to an empty string when the cancel button is clicked
+        sendRequest()
     }
     
     
@@ -132,6 +134,15 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
             cell.dishType.text = dishTypeArray[0]
         }
         return cell
+    }
+    
+    // Tell the delegate the table view is about to draw a cell for a particular row.
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // When the user gets to the end of the page, load 20 more recipes
+        if indexPath.row + 1 == recipeDict.count {
+            to += 20
+            sendRequest()
+        }
     }
     
     /*
