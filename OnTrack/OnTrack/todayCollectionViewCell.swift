@@ -9,6 +9,7 @@ import UIKit
 
 class todayCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var mealTypeLabel: UILabel!
     @IBOutlet weak var dish1NameLabel: UILabel!
     @IBOutlet weak var dish1CalorieLabel: UILabel!
     

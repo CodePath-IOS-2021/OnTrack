@@ -14,7 +14,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var communityTableView: UITableView!
     
     var allMealPlan = [PFObject]()
-    var myMealPlan = [PFObject]()
+    var myMealPlan = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +29,30 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     override func viewDidAppear(_ animated: Bool) {
         let query = PFQuery(className: "MealPlan")
-        query.includeKeys(["user", "createdAt", "breakfast_recipes"])
+        query.includeKeys(["objectId", "user", "createdAt", "breakfast_recipes", "lunch_recipes", "dinner_recipes"])
         query.limit = 20
         
         query.findObjectsInBackground { allMealPlan, error in
             if allMealPlan != nil {
                 self.allMealPlan = allMealPlan!
                 self.communityTableView.reloadData()
+                self.todayCollectionView.reloadData()
             }
         }
         
         let user = PFUser.current()!
-        myMealPlan = user["meal_plans"] as! [PFObject]
-        todayCollectionView.reloadData()
+        let userPlans = user["meal_plans"] as! [PFObject]
+        let currPlanObj = userPlans[0] as! PFObject
+        
+//        for plan in allMealPlan {
+//
+//            let planId = plan["objectId"] as! String
+//            print(planId)
+//            if currPlan == planId {
+//                print(plan)
+//            }
+//        }
+        myMealPlan = currPlanObj.objectId as! String
     }
     
     // NOTE: IMAGE SHOULD BE STORED IN BACK4APP, SO WE CAN ACCESS IT THROUGH THE CURRENT USER, IMAGE SHOULD BE APART OF IT, AFTER THEY ADDED IT IN RECIPEVIEWCONTROLLER
@@ -72,22 +83,58 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     // COLLECTION VIEW: For today's planned meals cards
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if myMealPlan.count > 0 {
+        if myMealPlan != "" {
             return 3
         }
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if myMealPlan.count > 0 {
-            let mealPlan = myMealPlan[0]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todayCollectionViewCell", for: indexPath) as! todayCollectionViewCell
+        if myMealPlan != "" {
+            for plan in allMealPlan {
+                let planId = plan.objectId!
+                if planId != myMealPlan {
+                    continue
+                }
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todayCollectionViewCell", for: indexPath) as! todayCollectionViewCell
+                
+                var meals = [PFObject]()
+                if indexPath.row == 0 {
+                    meals = (plan["breakfast_recipes"] as? [PFObject]) ?? []
+                    cell.mealTypeLabel.text = "Breakfast"
+                } else if indexPath.row == 1 {
+                    meals = (plan["lunch_recipes"] as? [PFObject]) ?? []
+                    cell.mealTypeLabel.text = "Lunch"
+                } else if indexPath.row == 2 {
+                    meals = (plan["dinner_recipes"] as? [PFObject]) ?? []
+                    cell.mealTypeLabel.text = "Dinner"
+                }
+                
+                if (meals.count >= 1) {
+                    cell.dish1NameLabel.text = meals[0]["label"] as? String
+                    cell.dish1CalorieLabel.text = meals[0]["calories"] as? String
+                } else {
+                    cell.dish1NameLabel.text = ""
+                    cell.dish1CalorieLabel.text = ""
+                }
+                if (meals.count >= 2) {
+                    cell.dish2NameLabel.text = meals[1]["label"] as? String
+                    cell.dish2CalorieLabel.text = meals[1]["calories"] as? String
+                } else {
+                    cell.dish2NameLabel.text = ""
+                    cell.dish2CalorieLabel.text = ""
+                }
+                if (meals.count >= 3) {
+                    cell.dish3NameLabel.text = meals[2]["label"] as? String
+                    cell.dish3CalorieLabel.text = meals[2]["calories"] as? String
+                } else {
+                    cell.dish3NameLabel.text = ""
+                    cell.dish3CalorieLabel.text = ""
+                }
+                
+                return cell
+            }
             
-            //let breakfastMeals = (mealPlan["breakfast_recipes"] as? [PFObject]) ?? []
-            //print(breakfastMeals)
-            //cell.dish1NameLabel.text = breakfastMeals[0]["label"] as! String
-            
-            return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
         return cell
