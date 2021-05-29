@@ -22,6 +22,7 @@
 		4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */; };
 		5001065626507C4300E13E1B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001065526507C4300E13E1B /* SignUpViewController.swift */; };
 		50643513265076F600FB323F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50643512265076F600FB323F /* LoginViewController.swift */; };
+		509C86402662D3650004A252 /* defaultTodayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C863F2662D3650004A252 /* defaultTodayCollectionViewCell.swift */; };
 		5CF16E8CE3C3ECA688BD0FB4 /* Pods_OnTrack_OnTrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484A62E69A43FC73BEC1A4A7 /* Pods_OnTrack_OnTrackUITests.framework */; };
 		861B76962655BF1200F4A058 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B76952655BF1200F4A058 /* HomeViewController.swift */; };
 		861B769B2655C12400F4A058 /* communityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B769A2655C12400F4A058 /* communityTableViewCell.swift */; };
@@ -71,6 +72,7 @@
 		4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeTableViewCell.swift; sourceTree = "<group>"; };
 		5001065526507C4300E13E1B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		50643512265076F600FB323F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		509C863F2662D3650004A252 /* defaultTodayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultTodayCollectionViewCell.swift; sourceTree = "<group>"; };
 		80C53CE42735FB75AA9148C9 /* Pods-OnTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTrackTests.release.xcconfig"; path = "Target Support Files/Pods-OnTrackTests/Pods-OnTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		861B76952655BF1200F4A058 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		861B769A2655C12400F4A058 /* communityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = communityTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				4C74A7872648E70D005D2D2D /* AppDelegate.swift */,
 				4C74A7892648E70D005D2D2D /* SceneDelegate.swift */,
 				4C74A78D2648E70D005D2D2D /* Main.storyboard */,
+				509C863F2662D3650004A252 /* defaultTodayCollectionViewCell.swift */,
 				5001065526507C4300E13E1B /* SignUpViewController.swift */,
 				4C74A7902648E70E005D2D2D /* Assets.xcassets */,
 				4C74A7922648E70E005D2D2D /* LaunchScreen.storyboard */,
@@ -450,6 +453,7 @@
 				861B76AA2656224800F4A058 /* profileMealsTableViewCell.swift in Sources */,
 				4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */,
 				4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */,
+				509C86402662D3650004A252 /* defaultTodayCollectionViewCell.swift in Sources */,
 				861B76A52656213500F4A058 /* ProfileViewController.swift in Sources */,
 				4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */,
 				4C74A78A2648E70D005D2D2D /* SceneDelegate.swift in Sources */,
