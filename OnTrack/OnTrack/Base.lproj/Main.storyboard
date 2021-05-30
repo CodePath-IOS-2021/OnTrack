@@ -912,6 +912,7 @@
                                             <constraint firstAttribute="trailing" secondItem="jce-Jp-jeU" secondAttribute="trailing" constant="40" id="qjq-fQ-Hbw"/>
                                             <constraint firstItem="auo-d1-ViI" firstAttribute="leading" secondItem="WIG-G2-n6K" secondAttribute="leading" constant="35" id="roZ-Um-7o1"/>
                                         </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="WIG-G2-n6K" firstAttribute="trailing" secondItem="GAd-JY-wh4" secondAttribute="trailing" id="ErA-KG-e3F"/>
