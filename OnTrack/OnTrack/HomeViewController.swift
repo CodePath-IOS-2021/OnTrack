@@ -41,18 +41,11 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         }
         
         let user = PFUser.current()!
-        let userPlans = user["meal_plans"] as! [PFObject]
-        let currPlanObj = userPlans[0] as! PFObject
-        
-//        for plan in allMealPlan {
-//
-//            let planId = plan["objectId"] as! String
-//            print(planId)
-//            if currPlan == planId {
-//                print(plan)
-//            }
-//        }
-        myMealPlan = currPlanObj.objectId as! String
+        if (user["meal_plans"] != nil) {
+            let userPlans = user["meal_plans"] as! [PFObject]
+            let currPlanObj = userPlans[0]
+            myMealPlan = currPlanObj.objectId!
+        }
     }
     
     // NOTE: IMAGE SHOULD BE STORED IN BACK4APP, SO WE CAN ACCESS IT THROUGH THE CURRENT USER, IMAGE SHOULD BE APART OF IT, AFTER THEY ADDED IT IN RECIPEVIEWCONTROLLER
@@ -68,13 +61,27 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         let user = mealPlan["user"] as! PFUser
         cell.usernameLabel.text = user.username
-        cell.createdLabel.text = mealPlan["createdAt"] as? String ?? "12:00pm"
         
-        let breakfastMeals = (mealPlan["breakfast_recipes"] as? [PFObject]) ?? []
-        cell.mealLabel.text = breakfastMeals[0]["label"] as! String
-        cell.calorieLabel.text = breakfastMeals[0]["calories"] as! String
+        var meals = [PFObject]()
+        switch Int.random(in: 0...2) {
+        case 0:
+            meals = (mealPlan["breakfast_recipes"] as? [PFObject]) ?? []
+        case 1:
+            meals = (mealPlan["lunch_recipes"] as? [PFObject]) ?? []
+        default:
+            meals = (mealPlan["dinner_recipes"] as? [PFObject]) ?? []
+        }
         
-        let mealURL = URL(string :breakfastMeals[0]["image"] as! String);
+        let date = mealPlan.createdAt!
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        cell.createdLabel.text = formatter.string(from: date)
+        cell.mealLabel.text = (meals[0]["label"] as! String)
+        cell.calorieLabel.text = (meals[0]["calories"] as! String)
+        
+        let mealURL = URL(string: meals[0]["image"] as! String);
         cell.mealImageView.af_setImage(withURL: mealURL!)
         
         return cell
@@ -124,13 +131,13 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                     cell.dish2NameLabel.text = ""
                     cell.dish2CalorieLabel.text = ""
                 }
-                if (meals.count >= 3) {
-                    cell.dish3NameLabel.text = meals[2]["label"] as? String
-                    cell.dish3CalorieLabel.text = meals[2]["calories"] as? String
-                } else {
-                    cell.dish3NameLabel.text = ""
-                    cell.dish3CalorieLabel.text = ""
-                }
+//                if (meals.count >= 3) {
+//                    cell.dish3NameLabel.text = meals[2]["label"] as? String
+//                    cell.dish3CalorieLabel.text = meals[2]["calories"] as? String
+//                } else {
+                cell.dish3NameLabel.text = ""
+                cell.dish3CalorieLabel.text = ""
+//                }
                 
                 return cell
             }

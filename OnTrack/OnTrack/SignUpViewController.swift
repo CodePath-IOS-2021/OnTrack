@@ -26,8 +26,7 @@ class SignUpViewController: UIViewController {
         
         user.signUpInBackground { success, error in
             if success {
-                print("Success in registering: \(success)")
-                //self.performSegue(withIdentifier: "signUpSegue", sender: nil)
+                self.performSegue(withIdentifier: "signUpSegue", sender: nil)
             } else {
                 print("Error: \(error?.localizedDescription)")
             }
