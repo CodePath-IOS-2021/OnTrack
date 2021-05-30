@@ -16,7 +16,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var recipeSearchBar: UISearchBar!
     @IBOutlet var caloryTagsCollectionView: UICollectionView!
     
-    var recipeDict = [[String:Any]]()          // dictionary to hold the recipe JSON object
+    var recipeDict = [[String:Any]]()          // dictionary to hold the recipe JSON objects
     let caloryTags = ["< 200", "200 - 400", "400 - 600", "> 600"]
     var selectedCaloryTags: [String] = []       // keep track of the selected calory tags
 
@@ -52,9 +52,9 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     let app_id = "a88f7131"
     let app_key = "5a4cd86659de2dc4bb22022785af1c61"
     
-    // number of recipes displayed at each round
-    let from = 0
-    let to = 20
+    // number of recipes displayed at each round, default is 20
+    let from = 0        // always starts from 0
+    var to = 20     // this can be incremented for infinite scrolling
     
     // recipe search filters
     var query = ""
@@ -101,6 +101,8 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         recipeSearchBar.text = ""
         recipeSearchBar.setShowsCancelButton(false, animated: true)
         recipeSearchBar.endEditing(true)
+        query = ""      // reset the query to an empty string when the cancel button is clicked
+        sendRequest()
     }
     
     
@@ -125,7 +127,22 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         let imageUrl = URL(string: imagePath)!
         cell.recipeImage.af.setImage(withURL: imageUrl)
         
+        if recipe["dishType"] == nil {
+            cell.dishType.text = "None"
+        } else {
+            let dishTypeArray = recipe["dishType"] as! [String]
+            cell.dishType.text = dishTypeArray[0]
+        }
         return cell
+    }
+    
+    // Tell the delegate the table view is about to draw a cell for a particular row.
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // When the user gets to the end of the page, load 20 more recipes
+        if indexPath.row + 1 == recipeDict.count {
+            to += 20
+            sendRequest()
+        }
     }
     
     /*
@@ -139,11 +156,11 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         // get the current recipe object
         let recipeDictionary = recipeDict[indexPath.row] as [String:Any]
         let recipe = recipeDictionary["recipe"] as! [String:Any]
-        showToast(controller: self, message: "Recipe added to \(mealType)!", seconds: 1)
+        Helper.showToast(controller: self, message: "Recipe added to \(mealType)!", seconds: 1)
         
         // send the recipe object to AddMealPlan ViewController
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "mealType"), object: mealType)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTV"), object: recipe)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addToMealPlan"), object: recipe)
     }
     
     
@@ -226,27 +243,27 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         updateCaloryRange()
     }
     
-    
-    // MARK: Helper functions
-    func showToast(controller: UIViewController, message: String, seconds: Double) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.view.layer.cornerRadius = 15
-        
-        controller.present(alert, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
-            alert.dismiss(animated: true)
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        // Find the selected recipe
+        let cell = sender as! UITableViewCell       // cast
+        let indexPath = recipeTableView.indexPath(for: cell)!
+        let recipeDictionary = recipeDict[indexPath.row] as [String:Any]
+        let recipe = recipeDictionary["recipe"] as! [String:Any]
+        
+        // Pass the selected recipe to the details view controller
+        let nav = segue.destination as! UINavigationController
+        let detailsViewController = nav.topViewController as! RecipeDetailsViewController
+        detailsViewController.recipe = recipe
+        detailsViewController.passedInMealType = mealType
+        detailsViewController.fromController = "Recipe"
+        
+        // don't highlight the cell after clicking it
+        recipeTableView.deselectRow(at: indexPath, animated: true)
     }
-    */
+    
 
 }
