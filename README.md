@@ -125,3 +125,6 @@ The application allows users to plan their meals for the next week, and check th
 <img src="http://g.recordit.co/MFxQBf4O4S.gif" width=250>
 <img src="profile_parse.gif" width=250>
 
+## Sprint 3 GIFs:
+<img src="http://g.recordit.co/dNBOnFxwbN.gif" width=250>
+

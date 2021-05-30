@@ -35,6 +35,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         query.findObjectsInBackground { allMealPlan, error in
             if allMealPlan != nil {
                 self.allMealPlan = allMealPlan!
+                self.allMealPlan.reverse()
                 self.communityTableView.reloadData()
                 self.todayCollectionView.reloadData()
             }
@@ -43,7 +44,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let user = PFUser.current()!
         if (user["meal_plans"] != nil) {
             let userPlans = user["meal_plans"] as! [PFObject]
-            let currPlanObj = userPlans[0]
+            let currPlanObj = userPlans[(userPlans.count - 1)]
             myMealPlan = currPlanObj.objectId!
         }
     }
@@ -70,6 +71,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             meals = (mealPlan["lunch_recipes"] as? [PFObject]) ?? []
         default:
             meals = (mealPlan["dinner_recipes"] as? [PFObject]) ?? []
+        }
+        if (meals.count == 0) {
+            return cell
         }
         
         let date = mealPlan.createdAt!
