@@ -219,7 +219,7 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     // MARK: Parse Backend
-    // send the meal plan to the Parse backend
+    // When clicking the add btn, send the meal plan to the Parse backend
     @IBAction func addMealPlanBtn(_ sender: Any) {
         let mealPlan = PFObject(className: "MealPlan")
         mealPlan["user"] = PFUser.current()
@@ -265,6 +265,11 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         breakfastRecipeArrBuffer = [PFObject]()
         lunchRecipeArrBuffer = [PFObject]()
         dinnerRecipeArrBuffer = [PFObject]()
+
+        // dimiss this currently presenting RecipeDetailsViewController after showing toast for 1 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     // add the customized Recipe object to the database
@@ -316,5 +321,10 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
             dinnerRecipeArrBuffer.append(recipe)
         }
     }
-
+    
+    // MARK: - Navigation
+    @IBAction func backToMainScreen(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
