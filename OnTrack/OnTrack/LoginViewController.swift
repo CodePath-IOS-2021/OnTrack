@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
             if user != nil {
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
             } else {
+                Helper.showToast(controller: self, message: "Invalid Username or Password", seconds: 1)
                 print("Error: \(error?.localizedDescription)")
             }
         }
