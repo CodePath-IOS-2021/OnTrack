@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         // refresh again
         super.viewDidAppear(animated)
+        myMeals = [PFObject]()
         self.loadMealPlans()
         
  
@@ -47,7 +48,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 // stored all of the recipes basically... in allMealPlan
                 self.allMealPlan = allMealPlan!
                 
-                self.mealsTableView.reloadData()
+                
 
                 let user = PFUser.current()!
                 print("user[meal]:" , user["meal_plans"])
@@ -74,7 +75,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                         }
                     }
-                        
+                    self.mealsTableView.reloadData()
                 }
                                      
             }
