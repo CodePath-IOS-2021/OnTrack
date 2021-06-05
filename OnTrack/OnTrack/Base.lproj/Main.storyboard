@@ -1523,8 +1523,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-XX-v7a">
-                                <rect key="frame" x="16" y="102.66666666666667" width="366" height="20.333333333333329"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Meals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-XX-v7a">
+                                <rect key="frame" x="16" y="100.66666666666667" width="366" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1543,6 +1543,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="180"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg5-I8-n5M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="180"/>
+                                                </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LPJ-9B-t6T">
                                                     <rect key="frame" x="8" y="8" width="138.66666666666666" height="50"/>
                                                     <subviews>
@@ -1594,7 +1597,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Eggs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5F-7C-hFb">
                                                             <rect key="frame" x="0.0" y="33.333333333333329" width="32" height="31.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" red="0.1488123002" green="0.60263721010000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="iSh-31-lXr">
@@ -1626,9 +1629,13 @@
                                             <constraints>
                                                 <constraint firstItem="LPJ-9B-t6T" firstAttribute="top" secondItem="ely-GR-ML8" secondAttribute="top" constant="8" id="0Bb-y4-LwC"/>
                                                 <constraint firstAttribute="trailing" secondItem="3gn-5v-5vY" secondAttribute="trailing" constant="8" id="FjY-4W-aUy"/>
+                                                <constraint firstItem="bg5-I8-n5M" firstAttribute="leading" secondItem="ely-GR-ML8" secondAttribute="leading" id="HTI-Wf-VQH"/>
+                                                <constraint firstAttribute="trailing" secondItem="bg5-I8-n5M" secondAttribute="trailing" id="KpA-H5-6qh"/>
+                                                <constraint firstAttribute="bottom" secondItem="bg5-I8-n5M" secondAttribute="bottom" id="LUX-Wr-kjk"/>
                                                 <constraint firstItem="3gn-5v-5vY" firstAttribute="top" secondItem="ely-GR-ML8" secondAttribute="top" constant="8" id="RuP-Bt-k9W"/>
                                                 <constraint firstAttribute="bottom" secondItem="3gn-5v-5vY" secondAttribute="bottom" constant="8" id="YAx-xk-ifi"/>
                                                 <constraint firstItem="LPJ-9B-t6T" firstAttribute="leading" secondItem="ely-GR-ML8" secondAttribute="leading" constant="8" id="YwD-6t-2vf"/>
+                                                <constraint firstItem="bg5-I8-n5M" firstAttribute="top" secondItem="ely-GR-ML8" secondAttribute="top" id="c1r-qa-xA3"/>
                                                 <constraint firstItem="3gn-5v-5vY" firstAttribute="leading" secondItem="3k7-Yo-jtL" secondAttribute="trailing" constant="8" id="f1c-QM-dOE"/>
                                                 <constraint firstAttribute="bottom" secondItem="3k7-Yo-jtL" secondAttribute="bottom" constant="8" id="kbi-qJ-3hG"/>
                                                 <constraint firstItem="3k7-Yo-jtL" firstAttribute="top" secondItem="LPJ-9B-t6T" secondAttribute="bottom" constant="16" id="lP1-OB-eTz"/>
@@ -1636,6 +1643,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="border" destination="bg5-I8-n5M" id="kLD-SW-Dip"/>
                                             <outlet property="caloriesLabel" destination="t8J-np-S4P" id="6Xm-jF-bjP"/>
                                             <outlet property="mealImageView" destination="3gn-5v-5vY" id="qnz-FS-ftE"/>
                                             <outlet property="mealLabel" destination="H5F-7C-hFb" id="nlg-TR-yuD"/>
@@ -1645,9 +1653,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqA-55-hcS">
-                                <rect key="frame" x="0.0" y="33" width="390" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OqA-55-hcS">
+                                <rect key="frame" x="0.0" y="44" width="390" height="47"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="OnTrack" id="y6f-8g-j7n">
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="plus" catalog="system" id="L3u-HX-jbe"/>
@@ -1660,10 +1668,14 @@
                         <constraints>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="bottom" secondItem="gxK-bM-n2l" secondAttribute="bottom" constant="13" id="Ens-qr-2cq"/>
                             <constraint firstItem="gxK-bM-n2l" firstAttribute="trailing" secondItem="qzN-nq-VON" secondAttribute="trailingMargin" id="HaN-CA-49x"/>
+                            <constraint firstItem="BVk-XX-v7a" firstAttribute="top" secondItem="OqA-55-hcS" secondAttribute="bottom" constant="10" id="M0K-4e-hJA"/>
                             <constraint firstItem="BVk-XX-v7a" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" constant="16" id="RAQ-Lp-mVl"/>
                             <constraint firstItem="qc5-10-ab5" firstAttribute="trailing" secondItem="BVk-XX-v7a" secondAttribute="trailing" constant="8" id="YvQ-B4-VDv"/>
+                            <constraint firstItem="OqA-55-hcS" firstAttribute="leading" secondItem="qc5-10-ab5" secondAttribute="leading" id="h7j-iB-huU"/>
+                            <constraint firstItem="OqA-55-hcS" firstAttribute="top" secondItem="qc5-10-ab5" secondAttribute="top" id="hgu-3n-Gwy"/>
                             <constraint firstItem="gxK-bM-n2l" firstAttribute="leading" secondItem="BVk-XX-v7a" secondAttribute="leading" id="nf3-kZ-mFY"/>
-                            <constraint firstItem="gxK-bM-n2l" firstAttribute="top" secondItem="BVk-XX-v7a" secondAttribute="bottom" constant="8" symbolic="YES" id="tLQ-I4-kQP"/>
+                            <constraint firstItem="gxK-bM-n2l" firstAttribute="top" secondItem="BVk-XX-v7a" secondAttribute="bottom" constant="10" id="tLQ-I4-kQP"/>
+                            <constraint firstItem="OqA-55-hcS" firstAttribute="trailing" secondItem="qc5-10-ab5" secondAttribute="trailing" id="xXX-mE-UzE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" selectedImage="person.fill" id="CRF-DX-EKY"/>

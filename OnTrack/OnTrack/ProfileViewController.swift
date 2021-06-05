@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         mealsTableView.delegate = self
         mealsTableView.dataSource = self
-
+        mealsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none     // remove separator
 
     }
     override func viewDidAppear(_ animated: Bool) {
