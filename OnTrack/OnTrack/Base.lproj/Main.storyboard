@@ -1654,7 +1654,7 @@
                                 </prototypes>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OqA-55-hcS">
-                                <rect key="frame" x="0.0" y="44" width="390" height="47"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="46.666666666666657"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="OnTrack" id="y6f-8g-j7n">
