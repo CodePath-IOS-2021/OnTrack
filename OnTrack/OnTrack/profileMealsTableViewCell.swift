@@ -32,5 +32,11 @@ class profileMealsTableViewCell: UITableViewCell {
         border.layer.borderWidth = 2
         border.layer.borderColor = UIColor.systemGray4.cgColor
     }
+    
+    // add spacing between tableView cells
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
+    }
 
 }

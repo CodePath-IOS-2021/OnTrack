@@ -221,6 +221,12 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Parse Backend
     // When clicking the add btn, send the meal plan to the Parse backend
     @IBAction func addMealPlanBtn(_ sender: Any) {
+        // special case: if no recipe is added, warn the user
+        if breakfastRecipes.count == 0 && lunchRecipes.count == 0 && dinnerRecipes.count == 0 {
+            Helper.showToast(controller: self, message: "No recipe is added", seconds: 1)
+            return
+        }
+        
         let mealPlan = PFObject(className: "MealPlan")
         mealPlan["user"] = PFUser.current()
     

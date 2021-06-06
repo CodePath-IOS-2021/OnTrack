@@ -105,13 +105,26 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     // MARK: Today's mealplan COLLECTION VIEW
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if myMealPlan != "" {
-            return 3
-        }
-        return 1
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // if the current user doesn't have any meal plan, display three empty widgets
+        if myMealPlan == "" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
+            if indexPath.row == 0 {
+                cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
+                cell.label.text = "No meals planned for breakfast"
+            } else if indexPath.row == 1 {
+                cell.backgroundColor = UIColor(red: 0.17, green: 0.76, blue: 0.19, alpha: 0.90)
+                cell.label.text = "No meals planned for lunch"
+            } else if indexPath.row == 2 {
+                cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
+                cell.label.text = "No meals planned for dinner"
+            }
+            return cell
+        }
+        
         if myMealPlan != "" {
             for plan in allMealPlan {
                 let planId = plan.objectId!
@@ -135,6 +148,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                     cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
                 }
                 
+                // if the meal count is 0, display an empty widge
                 if meals.count == 0 {
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
                     if indexPath.row == 0 {

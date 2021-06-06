@@ -33,8 +33,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidAppear(animated)
         myMeals = [PFObject]()
         self.loadMealPlans()
-        
- 
     }
     
     @objc func loadMealPlans() {
