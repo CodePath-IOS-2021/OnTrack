@@ -13,9 +13,11 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var todayCollectionView: UICollectionView!
     @IBOutlet weak var communityTableView: UITableView!
     
-    var allMealPlan = [PFObject]()
-    var myMealPlan = ""
+    var allMealPlan = [PFObject]()      // store all meal plans in the database for community posts
+    var myTodayMealPlan: PFObject?     // store current user's today's meal plan for today's meal section
     
+    // utils
+    let dateFormatter = DateFormatter()
     let myRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -30,6 +32,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         myRefreshControl.addTarget(self, action: #selector(loadMealPlans), for: .valueChanged)  // "self" means the current screen
         communityTableView.refreshControl = myRefreshControl
+        
+        dateFormatter.dateFormat = "MM-dd-yyyy"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,26 +41,40 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.loadMealPlans()
     }
     
+    // MARK: Databse Request
     @objc func loadMealPlans() {
         let query = PFQuery(className: "MealPlan")
         query.includeKeys(["objectId", "user", "createdAt", "breakfast_recipes", "lunch_recipes", "dinner_recipes"])
         query.limit = 20
         
+        // fetch all meal plans in the database
         query.findObjectsInBackground { allMealPlan, error in
             if allMealPlan != nil {
                 self.allMealPlan = allMealPlan!
                 self.allMealPlan.reverse()
                 self.communityTableView.reloadData()
-                self.todayCollectionView.reloadData()
                 self.myRefreshControl.endRefreshing()   // end refreshing after pulling, otherwise the spin will be there forever
+                
+                // fetch all meal plans from the current user
+                // can only execute a new query after the first fetch finishes
+                if let currentUser = PFUser.current() {
+                    query.whereKey("user", equalTo: currentUser)
+                    query.findObjectsInBackground { currentUserMealPlans, Error in
+                        if currentUserMealPlans != nil {
+                            // find current user's today's meal plan
+                            let date = Date()
+                            let todayDate = self.dateFormatter.string(from: date)    // get today's date as string
+                            
+                            for plan in currentUserMealPlans! {
+                                if plan["date"] as! String == todayDate {
+                                    self.myTodayMealPlan = plan
+                                }
+                            }
+                        }
+                        self.todayCollectionView.reloadData()
+                    }
+                }
             }
-        }
-        
-        let user = PFUser.current()!
-        if (user["meal_plans"] != nil) {
-            let userPlans = user["meal_plans"] as! [PFObject]
-            let currPlanObj = userPlans[(userPlans.count - 1)]
-            myMealPlan = currPlanObj.objectId!
         }
     }
     
@@ -75,16 +93,20 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         cell.usernameLabel.text = user.username
         
         var meals = [PFObject]()
-        switch Int.random(in: 0...2) {
-        case 0:
-            meals = (mealPlan["breakfast_recipes"] as? [PFObject]) ?? []
-        case 1:
-            meals = (mealPlan["lunch_recipes"] as? [PFObject]) ?? []
-        default:
-            meals = (mealPlan["dinner_recipes"] as? [PFObject]) ?? []
-        }
-        if (meals.count == 0) {
-            return cell
+        var mealType = ""
+        // randomized post
+        while(meals.count == 0){
+            switch Int.random(in: 0...2) {
+            case 0:
+                meals = (mealPlan["breakfast_recipes"] as? [PFObject]) ?? []
+                mealType = "breakfast"
+            case 1:
+                meals = (mealPlan["lunch_recipes"] as? [PFObject]) ?? []
+                mealType = "lunch"
+            default:
+                meals = (mealPlan["dinner_recipes"] as? [PFObject]) ?? []
+                mealType = "dinner"
+            }
         }
         
         let date = mealPlan.createdAt!
@@ -93,10 +115,14 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         cell.createdLabel.text = formatter.string(from: date)
-        cell.mealLabel.text = (meals[0]["label"] as! String)
-        cell.calorieLabel.text = (meals[0]["calories"] as! String)
         
-        let mealURL = URL(string: meals[0]["image"] as! String);
+        let randomIndex = Int.random(in: 0..<meals.count)
+        
+        cell.mealLabel.text = (meals[randomIndex]["label"] as! String)
+        cell.calorieLabel.text = (meals[randomIndex]["calories"] as! String)
+        cell.mealTypeLabel.text = mealType
+        
+        let mealURL = URL(string: meals[randomIndex]["image"] as! String);
         cell.mealImageView.af.setImage(withURL: mealURL!)
         
         return cell
@@ -109,8 +135,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // if the current user doesn't have any meal plan, display three empty widgets
-        if myMealPlan == "" {
+        // if there is no meal planned for today, display three empty widgets
+        if self.myTodayMealPlan == nil {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
             if indexPath.row == 0 {
                 cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
@@ -125,72 +151,63 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             return cell
         }
         
-        if myMealPlan != "" {
-            for plan in allMealPlan {
-                let planId = plan.objectId!
-                if planId != myMealPlan {
-                    continue
-                }
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todayCollectionViewCell", for: indexPath) as! todayCollectionViewCell
-                
-                var meals = [PFObject]()
-                if indexPath.row == 0 {
-                    meals = (plan["breakfast_recipes"] as? [PFObject]) ?? []
-                    cell.mealTypeLabel.text = "Breakfast"
-                    cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
-                } else if indexPath.row == 1 {
-                    meals = (plan["lunch_recipes"] as? [PFObject]) ?? []
-                    cell.mealTypeLabel.text = "Lunch"
-                    cell.backgroundColor = UIColor(red: 0.17, green: 0.76, blue: 0.19, alpha: 0.90)
-                } else if indexPath.row == 2 {
-                    meals = (plan["dinner_recipes"] as? [PFObject]) ?? []
-                    cell.mealTypeLabel.text = "Dinner"
-                    cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
-                }
-                
-                // if the meal count is 0, display an empty widge
-                if meals.count == 0 {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
-                    if indexPath.row == 0 {
-                        cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
-                        cell.label.text = "No meals planned for breakfast"
-                    } else if indexPath.row == 1 {
-                        cell.backgroundColor = UIColor(red: 0.17, green: 0.76, blue: 0.19, alpha: 0.90)
-                        cell.label.text = "No meals planned for lunch"
-                    } else if indexPath.row == 2 {
-                        cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
-                        cell.label.text = "No meals planned for dinner"
-                    }
-                    return cell
-                }
-                
-                if (meals.count >= 1) {
-                    cell.dish1NameLabel.text = meals[0]["label"] as? String
-                    cell.dish1CalorieLabel.text = meals[0]["calories"] as? String
-                }
-                
-                if (meals.count >= 2) {
-                    cell.dish2NameLabel.text = meals[1]["label"] as? String
-                    cell.dish2CalorieLabel.text = meals[1]["calories"] as? String
-                } else {
-                    cell.dish2NameLabel.text = ""
-                    cell.dish2CalorieLabel.text = ""
-                    cell.meal2.backgroundColor = UIColor.clear
-                }
-                if (meals.count >= 3) {
-                    cell.dish3NameLabel.text = meals[2]["label"] as? String
-                    cell.dish3CalorieLabel.text = meals[2]["calories"] as? String
-                } else {
-                    cell.dish3NameLabel.text = ""
-                    cell.dish3CalorieLabel.text = ""
-                    cell.meal3.backgroundColor = UIColor.clear
-                }
-                
-                return cell
-            }
-            
+        // fetch the meals for one of breakfast, lunch, dinner
+        var meals = [PFObject]()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todayCollectionViewCell", for: indexPath) as! todayCollectionViewCell
+        if indexPath.row == 0 {
+            meals = myTodayMealPlan?["breakfast_recipes"] as! [PFObject]
+            cell.mealTypeLabel.text = "Breakfast"
+            cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
+        } else if indexPath.row == 1 {
+            meals = myTodayMealPlan?["lunch_recipes"] as! [PFObject]
+            cell.mealTypeLabel.text = "Lunch"
+            cell.backgroundColor = UIColor(red: 0.17, green: 0.76, blue: 0.19, alpha: 0.90)
+        } else if indexPath.row == 2 {
+            meals = myTodayMealPlan?["dinner_recipes"] as! [PFObject]
+            cell.mealTypeLabel.text = "Dinner"
+            cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
+        
+        // if there is no meal planned, display empty widgets
+        if meals.count == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultTodayCollectionViewCell", for: indexPath) as! defaultTodayCollectionViewCell
+            if indexPath.row == 0 {
+                cell.backgroundColor = UIColor(red: 0.89, green: 0.21, blue: 0.21, alpha: 0.63)
+                cell.label.text = "No meals planned for breakfast"
+            } else if indexPath.row == 1 {
+                cell.backgroundColor = UIColor(red: 0.17, green: 0.76, blue: 0.19, alpha: 0.90)
+                cell.label.text = "No meals planned for lunch"
+            } else if indexPath.row == 2 {
+                cell.backgroundColor = UIColor(red: 0, green: 0.58, blue: 1, alpha: 1)
+                cell.label.text = "No meals planned for dinner"
+            }
+            return cell
+        }
+        
+        if (meals.count >= 1) {
+            cell.dish1NameLabel.text = meals[0]["label"] as? String
+            cell.dish1CalorieLabel.text = meals[0]["calories"] as? String
+        }
+        
+        if (meals.count >= 2) {
+            cell.dish2NameLabel.text = meals[1]["label"] as? String
+            cell.dish2CalorieLabel.text = meals[1]["calories"] as? String
+            cell.meal2.backgroundColor = UIColor.white
+        } else {
+            cell.dish2NameLabel.text = ""
+            cell.dish2CalorieLabel.text = ""
+            cell.meal2.backgroundColor = UIColor.clear
+        }
+        if (meals.count >= 3) {
+            cell.dish3NameLabel.text = meals[2]["label"] as? String
+            cell.dish3CalorieLabel.text = meals[2]["calories"] as? String
+            cell.meal3.backgroundColor = UIColor.white
+        } else {
+            cell.dish3NameLabel.text = ""
+            cell.dish3CalorieLabel.text = ""
+            cell.meal3.backgroundColor = UIColor.clear
+        }
+        
         return cell
     }
     

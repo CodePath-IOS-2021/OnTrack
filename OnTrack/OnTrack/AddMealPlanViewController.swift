@@ -23,6 +23,8 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var lunchTVHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dinnerTVHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
     // Three dictionary arrays to keep track of the added recipes
     var breakfastRecipes = [[String:Any]]()
     var lunchRecipes = [[String:Any]]()
@@ -32,6 +34,10 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     var breakfastRecipeArrBuffer = [PFObject]()
     var lunchRecipeArrBuffer = [PFObject]()
     var dinnerRecipeArrBuffer = [PFObject]()
+    
+    let dateFormatter = DateFormatter()
+    
+    var myMealPlans = [PFObject]()      // store all meal plans created by the current user
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +62,27 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         dinnerTV.dataSource = self
         dinnerTV.backgroundColor = UIColor.clear
         dinnerTV.separatorColor = UIColor.white
+        
+        // datePicker config
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .compact
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        
+        self.loadMyMealPlans()
+    }
+    
+    // load all my meal plans
+    @objc func loadMyMealPlans() {
+        let query = PFQuery(className: "MealPlan")
+        // fetch all meal plans from the current user
+        if let currentUser = PFUser.current() {
+            query.whereKey("user", equalTo: currentUser)
+            query.findObjectsInBackground { currentUserMealPlans, Error in
+                if currentUserMealPlans != nil {
+                    self.myMealPlans = currentUserMealPlans!
+                }
+            }
+        }
     }
     
     // MARK: data passing: add/remove meals
@@ -221,6 +248,7 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: Parse Backend
     // When clicking the add btn, send the meal plan to the Parse backend
     @IBAction func addMealPlanBtn(_ sender: Any) {
+        
         // special case: if no recipe is added, warn the user
         if breakfastRecipes.count == 0 && lunchRecipes.count == 0 && dinnerRecipes.count == 0 {
             Helper.showToast(controller: self, message: "No recipe is added", seconds: 1)
@@ -229,6 +257,15 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         
         let mealPlan = PFObject(className: "MealPlan")
         mealPlan["user"] = PFUser.current()
+        
+        // add the selected date for the meal plan as a string
+        let selectedDate = dateFormatter.string(from: datePicker.date)
+        if isDuplicateDate(date: selectedDate) {
+            Helper.showToast(controller: self, message: "This date already has a meal plan", seconds: 1)
+            return
+        } else {
+            mealPlan["date"] = selectedDate
+        }
     
         // add the customized Recipe objects one by one to the database
         for curr_recipe in breakfastRecipes {
@@ -326,6 +363,16 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             dinnerRecipeArrBuffer.append(recipe)
         }
+    }
+    
+    // check if the selected date already has a meal plan
+    func isDuplicateDate(date: String) -> Bool {
+        for plan in myMealPlans {
+            if plan["date"] as! String == date {
+                return true
+            }
+        }
+        return false
     }
     
     // MARK: - Navigation
