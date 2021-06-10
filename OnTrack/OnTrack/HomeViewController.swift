@@ -68,6 +68,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                             for plan in currentUserMealPlans! {
                                 if plan["date"] as! String == todayDate {
                                     self.myTodayMealPlan = plan
+                                    break
                                 } else {
                                     self.myTodayMealPlan = nil
                                 }
