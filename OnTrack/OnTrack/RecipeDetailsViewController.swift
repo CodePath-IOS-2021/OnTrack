@@ -20,11 +20,15 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var ingredientsTVHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBtn: UIButton!
     
+    // two constraints that can be modified for hiding the bottomBtn
+    @IBOutlet weak var bottomBtnHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBtnBottomConstraint: NSLayoutConstraint!
+    
     // arguments passed in by the previous ViewController
     var recipe: [String:Any]!
     var passedInMealType: String = ""
     var fromController: String = ""     // indicate the previous view controller
-    var indexOfRecipe = 0       // the index of the clicked recipe from the meal plan screen
+    var indexOfRecipe = 0       // the index of the clicked recipe from the meal plan screen, needed for data passing
     
     // local arguments
     var ingredientsArray: [String] = []     // store the ingredients of the recipe
@@ -41,29 +45,37 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         titleLabel.text = recipe["label"] as? String
         titleLabel.textAlignment = NSTextAlignment.center
         
-        let caloryNumber = recipe["calories"] as! NSNumber      // calories is a number
-        let roundCaloryNumber = round(Double(truncating: caloryNumber) * 100) / 100.0    // round it to 2 decimal places
-        totalCalories.text = String(roundCaloryNumber)         // convert it to a string
         
-        if recipe["dishType"] == nil {
-            dishType.text = "None"
+        if recipe["mode"] as? String == "editing" {
+            totalCalories.text = recipe["calories"] as? String
+            dishType.text = recipe["dishType"] as? String
+            cuisineType.text = recipe["cuisineType"] as? String
+            mealType.text = recipe["mealType"] as? String
         } else {
-            let dishTypeArray = recipe["dishType"] as! [String]
-            dishType.text = dishTypeArray[0]
-        }
-        
-        if recipe["cuisineType"] == nil {
-            cuisineType.text = "None"
-        } else {
-            let cuisineTypeArray = recipe["cuisineType"] as! [String]
-            cuisineType.text = cuisineTypeArray[0]
-        }
-        
-        if recipe["mealType"] == nil {
-            mealType.text = "None"
-        } else {
-            let mealTypeArray = recipe["mealType"] as! [String]
-            mealType.text = mealTypeArray[0]
+            let caloryNumber = recipe["calories"] as! NSNumber      // calories is a number
+            let roundCaloryNumber = round(Double(truncating: caloryNumber) * 100) / 100.0    // round it to 2 decimal places
+            totalCalories.text = String(roundCaloryNumber)         // convert it to a string
+
+            if recipe["dishType"] == nil {
+                dishType.text = "None"
+            } else {
+                let dishTypeArray = recipe["dishType"] as! [String]
+                dishType.text = dishTypeArray[0]
+            }
+            
+            if recipe["cuisineType"] == nil {
+                cuisineType.text = "None"
+            } else {
+                let cuisineTypeArray = recipe["cuisineType"] as! [String]
+                cuisineType.text = cuisineTypeArray[0]
+            }
+            
+            if recipe["mealType"] == nil {
+                mealType.text = "None"
+            } else {
+                let mealTypeArray = recipe["mealType"] as! [String]
+                mealType.text = mealTypeArray[0]
+            }
         }
         
         ingredientsTV.delegate = self
@@ -77,6 +89,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         if fromController == "AddMealPlan" {
             bottomBtn.setTitle("Remove from meal plan", for: .normal)
             bottomBtn.backgroundColor = UIColor.red
+        } else if fromController == "Profile" {
+            bottomBtn.isHidden = true
+            bottomBtnHeightConstraint.constant = 0
         }
     }
     
