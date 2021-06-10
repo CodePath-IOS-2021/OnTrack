@@ -20,6 +20,8 @@
 		4C74A7AA2648E70E005D2D2D /* OnTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7A92648E70E005D2D2D /* OnTrackUITests.swift */; };
 		4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */; };
 		4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */; };
+		4C79F436266EF814000C77B6 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79F435266EF814000C77B6 /* DateCollectionViewCell.swift */; };
+		4C79F438266FF7CC000C77B6 /* MealPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79F437266FF7CC000C77B6 /* MealPlanTableViewCell.swift */; };
 		4CCCD0CC2659E06300417B05 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */; };
 		4CCCD0CE265A31DC00417B05 /* IngredientTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */; };
 		4CEC68BD265C5D64002963DB /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEC68BC265C5D64002963DB /* Helper.swift */; };
@@ -73,6 +75,8 @@
 		4C74A7AB2648E70E005D2D2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C74A7B92648EE21005D2D2D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		4C74A7BB2648EE72005D2D2D /* recipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipeTableViewCell.swift; sourceTree = "<group>"; };
+		4C79F435266EF814000C77B6 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C79F437266FF7CC000C77B6 /* MealPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanTableViewCell.swift; sourceTree = "<group>"; };
 		4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTVCell.swift; sourceTree = "<group>"; };
 		4CEC68BC265C5D64002963DB /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				4CCCD0CB2659E06300417B05 /* RecipeDetailsViewController.swift */,
 				4CCCD0CD265A31DC00417B05 /* IngredientTVCell.swift */,
 				4CEC68BC265C5D64002963DB /* Helper.swift */,
+				4C79F435266EF814000C77B6 /* DateCollectionViewCell.swift */,
+				4C79F437266FF7CC000C77B6 /* MealPlanTableViewCell.swift */,
 			);
 			path = OnTrack;
 			sourceTree = "<group>";
@@ -458,12 +464,14 @@
 				4CCCD0CE265A31DC00417B05 /* IngredientTVCell.swift in Sources */,
 				4C559A96264F548700183179 /* CaloryTagCell.swift in Sources */,
 				4C74A7BA2648EE21005D2D2D /* RecipeViewController.swift in Sources */,
+				4C79F438266FF7CC000C77B6 /* MealPlanTableViewCell.swift in Sources */,
 				4C74A7BC2648EE72005D2D2D /* recipeTableViewCell.swift in Sources */,
 				4CEC68BD265C5D64002963DB /* Helper.swift in Sources */,
 				861B76962655BF1200F4A058 /* HomeViewController.swift in Sources */,
 				861B76AA2656224800F4A058 /* profileMealsTableViewCell.swift in Sources */,
 				4C559A98264F8DAD00183179 /* AddMealPlanViewController.swift in Sources */,
 				4C2939C926505B810049AE8F /* MealTableViewCell.swift in Sources */,
+				4C79F436266EF814000C77B6 /* DateCollectionViewCell.swift in Sources */,
 				509C86402662D3650004A252 /* defaultTodayCollectionViewCell.swift in Sources */,
 				861B76A52656213500F4A058 /* ProfileViewController.swift in Sources */,
 				4C74A7882648E70D005D2D2D /* AppDelegate.swift in Sources */,

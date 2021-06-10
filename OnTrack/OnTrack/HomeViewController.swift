@@ -68,6 +68,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                             for plan in currentUserMealPlans! {
                                 if plan["date"] as! String == todayDate {
                                     self.myTodayMealPlan = plan
+                                } else {
+                                    self.myTodayMealPlan = nil
                                 }
                             }
                         }
@@ -212,7 +214,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     
-    // MARK: - Navigation
+    // MARK: - Logout
     @IBAction func onLogoutBtn(_ sender: Any) {
         PFUser.logOut()     // clear the parse cache
         // navigate back to the login screen
