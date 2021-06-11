@@ -409,13 +409,21 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
+        // cannot add meal plan to the past!
+        let selectedDate = dateFormatter.string(from: datePicker.date)  // selected date in the datePicker
+        let today = Date()
+        let todayDate = dateFormatter.string(from: today)
+        if selectedDate != todayDate && datePicker.date < today {
+            Helper.showToast(controller: self, message: "Cannot add meal plan to the past", seconds: 1)
+            return
+        }
+        
         // MARK: Database adding
         if mode == "add" || mode == "addAndEdit"{
             let mealPlan = PFObject(className: "MealPlan")
             mealPlan["user"] = PFUser.current()
             
             // add the selected date for the meal plan as a string
-            let selectedDate = dateFormatter.string(from: datePicker.date)
             if isDuplicateDate(date: selectedDate) {
                 Helper.showToast(controller: self, message: "This date already has a meal plan", seconds: 1)
                 return
@@ -471,7 +479,6 @@ class AddMealPlanViewController: UIViewController, UITableViewDelegate, UITableV
             query.getObjectInBackground(withId: (currMealPlan?.objectId)!) { fetchedMealPlan, error in
                 if fetchedMealPlan != nil {
                     // update meal plan date if changed
-                    let selectedDate = self.dateFormatter.string(from: self.datePicker.date)
                     if selectedDate != fetchedMealPlan?["date"] as? String {
                         if self.isDuplicateDate(date: selectedDate) {
                             Helper.showToast(controller: self, message: "This date already has a meal plan", seconds: 1)

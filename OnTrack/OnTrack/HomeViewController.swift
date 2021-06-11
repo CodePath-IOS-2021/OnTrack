@@ -18,6 +18,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     // utils
     let dateFormatter = DateFormatter()
+    let dayOfWeekFormatter = DateFormatter()
     let myRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         communityTableView.dataSource = self
         communityTableView.delegate = self
         communityTableView.separatorStyle = UITableViewCell.SeparatorStyle.none     // remove separator
+        communityTableView.allowsSelection = false
         
         todayCollectionView.delegate = self
         todayCollectionView.dataSource = self
@@ -34,6 +36,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         communityTableView.refreshControl = myRefreshControl
         
         dateFormatter.dateFormat = "MM-dd-yyyy"
+        dayOfWeekFormatter.dateFormat = "EEEE"      // "Monday"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +45,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     // MARK: Databse Request
+    
+    // load in all meal plans in the database for community post
+    // load in all current user's meal plans for today's meal section and deleting outdated plan
     @objc func loadMealPlans() {
         let query = PFQuery(className: "MealPlan")
         query.includeKeys(["objectId", "user", "createdAt", "breakfast_recipes", "lunch_recipes", "dinner_recipes"])
@@ -62,15 +68,50 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                     query.findObjectsInBackground { currentUserMealPlans, Error in
                         if currentUserMealPlans != nil {
                             // find current user's today's meal plan
-                            let date = Date()
-                            let todayDate = self.dateFormatter.string(from: date)    // get today's date as string
+                            let today = Date()
+                            let todayDate = self.dateFormatter.string(from: today)
                             
+                            self.myTodayMealPlan = nil
                             for plan in currentUserMealPlans! {
+                                let curr_date = self.dateFormatter.date(from: plan["date"] as! String)!
+                                
                                 if plan["date"] as! String == todayDate {
                                     self.myTodayMealPlan = plan
-                                    break
-                                } else {
-                                    self.myTodayMealPlan = nil
+                                }
+                                // if curr_plan is outdated, delete it in the database
+                                else if curr_date < today {
+                                    // delete all recipe objects and the meal plan object
+                                    for recipe in plan["breakfast_recipes"] as! [PFObject] {
+                                        recipe.deleteInBackground()
+                                    }
+                                    for recipe in plan["lunch_recipes"] as! [PFObject] {
+                                        recipe.deleteInBackground()
+                                    }
+                                    for recipe in plan["dinner_recipes"] as! [PFObject] {
+                                        recipe.deleteInBackground()
+                                    }
+                                    var new_mealPlan = [PFObject]()
+                                    for curr_plan in currentUser["meal_plans"] as! [PFObject] {
+                                        if curr_plan.objectId != plan.objectId {
+                                            new_mealPlan.append(curr_plan)
+                                        }
+                                    }
+                                    // reset the "meal_plans" attribute of the current user
+                                    currentUser["meal_plans"] = new_mealPlan
+                                    currentUser.saveInBackground(block: { success, error in
+                                        if success {
+                                            print("User profile updated")
+                                            plan.deleteInBackground(block: { success, error in
+                                                if success {
+                                                    print("outdated meal plan deleted")
+                                                } else {
+                                                    print(error!)
+                                                }
+                                            })
+                                        } else {
+                                            print(error!)
+                                        }
+                                    })
                                 }
                             }
                         }
@@ -127,6 +168,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         let mealURL = URL(string: meals[randomIndex]["image"] as! String);
         cell.mealImageView.af.setImage(withURL: mealURL!)
+        
+        let mealPlan_date = dateFormatter.date(from: mealPlan["date"] as! String)!
+        let dayOfWeekString = dayOfWeekFormatter.string(from: mealPlan_date)
+        cell.dayOfWeek.text = dayOfWeekString
         
         return cell
 

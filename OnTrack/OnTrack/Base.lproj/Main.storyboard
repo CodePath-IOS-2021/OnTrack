@@ -389,7 +389,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hJu-eV-OlO">
-                                                            <rect key="frame" x="0.0" y="91.666666666666657" width="65" height="29"/>
+                                                            <rect key="frame" x="0.0" y="91.666666666666657" width="151.33333333333334" height="29"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXg-aW-5QS">
                                                                     <rect key="frame" x="0.0" y="0.0" width="20.333333333333332" height="19.333333333333332"/>
@@ -399,6 +399,18 @@
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV4-Cd-PKl">
                                                                     <rect key="frame" x="25.333333333333339" y="0.0" width="39.666666666666657" height="19.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOx-Xf-lF5">
+                                                                    <rect key="frame" x="70" y="0.0" width="18.333333333333329" height="19.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edL-vT-46o">
+                                                                    <rect key="frame" x="93.333333333333329" y="0.0" width="57.999999999999986" height="19.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -436,6 +448,7 @@
                                             <outlet property="border" destination="IPp-kv-l8e" id="SP7-5o-SBk"/>
                                             <outlet property="calorieLabel" destination="ejZ-9A-VzQ" id="ihb-xh-3mn"/>
                                             <outlet property="createdLabel" destination="WwG-Q7-fyq" id="hJs-5R-CzW"/>
+                                            <outlet property="dayOfWeek" destination="edL-vT-46o" id="vhx-d8-KiE"/>
                                             <outlet property="mealImageView" destination="0C9-a0-fgS" id="mPW-qL-sCf"/>
                                             <outlet property="mealLabel" destination="O4m-0D-Bqe" id="Wvf-FL-PuH"/>
                                             <outlet property="mealTypeLabel" destination="GV4-Cd-PKl" id="MOL-mF-RKb"/>
@@ -2083,7 +2096,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XCZ-TE-b9F"/>
+        <segue reference="yaj-3l-rjO"/>
         <segue reference="vCk-K2-vkF"/>
         <segue reference="2KM-Z7-27R"/>
         <segue reference="JmE-OA-dHB"/>

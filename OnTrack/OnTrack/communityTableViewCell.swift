@@ -15,6 +15,7 @@ class communityTableViewCell: UITableViewCell {
     @IBOutlet weak var createdLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var mealTypeLabel: UILabel!
+    @IBOutlet weak var dayOfWeek: UILabel!
     
     @IBOutlet weak var border: UIView!
     
